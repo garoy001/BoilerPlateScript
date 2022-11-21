@@ -14,18 +14,13 @@ then
 	cd ~/OneDrive/Desktop/WebDevProject/"General Assembly"/Labs
 	mkdir $labName
 	cd ./$labName
-	if [[ "$MVC" == "f" ]] ;
-	then
-		createBasic
-	elif [[ "$MVC" == "t" ]] ;
-	then
-		createEJS
-	fi
 	if [[ "$express" == "t" ]] ;
 	then
 		createExpress
+		checkMVC
 		echo "File : $labName >> succesfully created"
 	else
+		checkMVC
 		echo "File : $labName >> succesfully created"	
 	fi
 elif [[ "$type" == "class" ]] ;
@@ -38,18 +33,13 @@ then
 	cd ~/OneDrive/Desktop/WebDevProject/"General Assembly"/"Class Folders"
 	mkdir "$newFolder"
 	cd ./"$newFolder"
-	if [[ "$MVC" == "f" ]] ;
-	then
-		createBasic
-	elif [[ "$MVC" == "t" ]] ;
-	then
-		createEJS
-	fi
 	if [[ "$express" == "t" ]] ;
 	then
 		createExpress
+		checkMVC
 		echo "File : $newFolder >> succesfully created"
 	else
+		checkMVC
 		echo "File : $newFolder >> succesfully created"
 	fi
 
@@ -60,30 +50,19 @@ then
         cd ~/OneDrive/Desktop/WebDevProject/"General Assembly"/HW
         mkdir $homeworkName
         cd ./$homeworkName
-	if [[ "$MVC" == "f" ]] ;
-	then
-		createBasic
-	elif [[ "$MVC" == "t" ]] ;
-	then
-		createEJS
-	fi
 	if [[ "$express" == "t" ]] ;
 	then
 		createExpress
+		checkMVC
 		echo "File : $homeworkName >> succesfully created"
 	else
+		checkMVC
 		echo "File : $homeworkName >> succesfully created"
 	fi
 
 else
 	echo "File >> failed to be made"
 fi
-}
-
-function gainstall() {
-	cd ~
-	touch .bash_profile
-	echo "source ~/projectCreate.sh" >> .bash_profile
 }
 
 function createBasic() {
@@ -128,4 +107,14 @@ function createExpress() {
 		touch .gitignore
 		printf ".env\nnode_modules" >> .gitignore
 		printf "const { response } = require('express');\nconst express = require('express');\nrequire('dotenv').config();\n\nconst app = express();\nconst port = process.env.PORT || 3000;\n\n\napp.listen(port, () => {\n\tconsole.log(\`listening to port \${port}\`);\n});" >> server.js
+}
+
+function checkMVC(){
+	if [[ "$MVC" == "f" ]] ;
+	then
+		createBasic
+	elif [[ "$MVC" == "t" ]] ;
+	then
+		createEJS
+	fi
 }
